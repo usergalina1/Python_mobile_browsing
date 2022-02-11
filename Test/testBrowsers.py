@@ -34,6 +34,11 @@ class TestBrowsers:
         'https://www.9now.com.au/',
         'https://www.gumtree.com.au/'
     ]
+    start_x = 860
+    start_y = 1597
+    end_x = 943
+    end_y = 90
+    duration = 300
 
     def test_open_chrome_browser(self):
         self.open_browser = self.driver.find_element(AppiumBy.ACCESSIBILITY_ID, "Chrome")
@@ -62,8 +67,8 @@ class TestBrowsers:
         self.driver.press_keycode(3)
 
     def test_open_opera_browser(self):
-        self.driver.swipe(860, 1597, 943, 90, 300)
-        self.driver.swipe(860, 1597, 943, 90, 300)
+        self.driver.swipe(self.start_x, self.start_y, self.end_x, self.end_y, self.duration)
+        self.driver.swipe(self.start_x, self.start_y, self.end_x, self.end_y, self.duration)
         self.open_browser = self.driver.find_element(AppiumBy.XPATH, '//android.widget.TextView[@text="Opera"]')
         self.open_browser.click()
         print("Opera:")
@@ -83,7 +88,7 @@ class TestBrowsers:
         self.driver.press_keycode(3)
 
     def test_open_duckduckgo_browser(self):
-        self.driver.swipe(860, 1597, 943, 90, 300)
+        self.driver.swipe(self.start_x, self.start_y, self.end_x, self.end_y, self.duration)
         self.open_browser = self.driver.find_element(AppiumBy.ACCESSIBILITY_ID, "DuckDuckGo")
         self.open_browser.click()
         print("DuckDuckGo:")
