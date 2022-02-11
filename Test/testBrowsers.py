@@ -44,8 +44,7 @@ class TestBrowsers:
             self.driver.set_value(search_bar, i)
             self.driver.execute_script('mobile: performEditorAction',
                                        {
-                                           'action': 'go'})  # http://appium.io/docs/en/writing-running-appium/android/android-ime/
-            # assert i == self.driver.current_url
+                                           'action': 'go'})
             print("Website:" + i, self.driver.get_device_time())
             time.sleep(10)
 
