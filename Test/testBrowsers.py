@@ -39,8 +39,15 @@ class TestBrowsers:
     end_x = 943
     end_y = 90
     duration = 300
+    time = 5
+
+    def file_time_of_websites(self, website, browser):
+        file = open("C:/Users/gademysh2001/Documents/Android Automation/GIT/webbrowsing.txt", 'a')
+        file.write("\n " + browser + ": " + website + self.driver.get_device_time())
+        file.close()
 
     def test_open_chrome_browser(self):
+        self.browser = "Chrome"
         self.open_browser = self.driver.find_element(AppiumBy.ACCESSIBILITY_ID, "Chrome")
         self.open_browser.click()
         # open websites
@@ -51,7 +58,8 @@ class TestBrowsers:
                                        {
                                            'action': 'go'})
             print("Website:" + i, self.driver.get_device_time())
-            time.sleep(10)
+            self.file_time_of_websites(i, self.browser)
+            time.sleep(self.time)
 
             tab_icon = self.driver.find_element(AppiumBy.ID, "com.android.chrome:id/tab_switcher_button")
             tab_icon.click()
@@ -67,11 +75,11 @@ class TestBrowsers:
         self.driver.press_keycode(3)
 
     def test_open_opera_browser(self):
+        self.browser = "Opera"
         self.driver.swipe(self.start_x, self.start_y, self.end_x, self.end_y, self.duration)
         self.driver.swipe(self.start_x, self.start_y, self.end_x, self.end_y, self.duration)
         self.open_browser = self.driver.find_element(AppiumBy.XPATH, '//android.widget.TextView[@text="Opera"]')
         self.open_browser.click()
-        print("Opera:")
         # open websites
         search_bar = self.driver.find_element(AppiumBy.ID, 'com.opera.browser:id/url_field')
         search_bar.clear()
@@ -81,24 +89,30 @@ class TestBrowsers:
                                        {
                                            'action': 'go'})
             print("Website:" + i, self.driver.get_device_time())
-            time.sleep(5)
+
+            self.file_time_of_websites(i, self.browser)
+
+            time.sleep(self.time)
             search_bar.click()
             search_bar.clear()
         # press Home button
         self.driver.press_keycode(3)
 
     def test_open_duckduckgo_browser(self):
+        self.browser = "DuckDuckGo"
         self.driver.swipe(self.start_x, self.start_y, self.end_x, self.end_y, self.duration)
         self.open_browser = self.driver.find_element(AppiumBy.ACCESSIBILITY_ID, "DuckDuckGo")
         self.open_browser.click()
-        print("DuckDuckGo:")
         # open websites
         for i in self.websites:
             search_bar = self.driver.find_element(AppiumBy.ID, "com.duckduckgo.mobile.android:id/omnibarTextInput")
             search_bar.send_keys(i)
             self.driver.press_keycode(66)
+
             print("Website:" + i, self.driver.get_device_time())
-            time.sleep(5)
+            self.file_time_of_websites(i, self.browser)
+
+            time.sleep(self.time)
             if i != self.websites[-1]:
                 tap_count_tab = self.driver.find_element(AppiumBy.ID, "com.duckduckgo.mobile.android:id/tabCount")
                 tap_count_tab.click()
