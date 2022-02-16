@@ -5,9 +5,9 @@ from appium import webdriver
 from appium.webdriver.common.appiumby import AppiumBy
 
 
-class TestBrowsers:
+class TestBrowsers(unittest.TestCase):
 
-    def setup(self):
+    def setUp(self):
         self.driver = webdriver.Remote(command_executor="http://localhost:4723/wd/hub",
                                        desired_capabilities=
                                        {
@@ -24,30 +24,39 @@ class TestBrowsers:
 
     websites = [
         'https://www.nbc.com/',
-        'https://www.discovery.com/tv-shows/gold-rush/',
+        'https://www.m.youtube/',
         'https://www.buzzfeed.com/',
-        'http://www.espn.com/watch',
-        'https://aiuto.libero.it/',
-        'https://www.tgcom24.mediaset.it/',
-        'http://www.raisport.rai.it/',
-        'https://www.starbene.it/',
-        'https://www.9now.com.au/',
-        'https://www.gumtree.com.au/'
+        'https://www.espn.com/watch',
+        'https://www.instagram.com/',
+        'https://www.amazon.com/',
+        'https://www.msn.com/',
+        'https://www.fandom.com/',
+        'https://www.netflix.com/',
+        'https://www.cnn.com/',
+        'http://www.countryusaoshkosh.com/',
+        'http://www.washington.edu/',
+        'http://www.neverssl.com/',
+        'http://www.example.com/',
+        'http://www.go.com/',
+        'http://www.baidu.com/',
+        'http://www.gnu.org/',
+        'http://www.techofires.com/',
+        'http://www.arta.gr/',
+        'http://www.polygyros.gr/'
     ]
     start_x = 860
     start_y = 1597
     end_x = 943
     end_y = 90
     duration = 300
-    time = 5
+    time = 20
 
-    def file_time_of_websites(self, website, browser):
-        file = open("C:/Users/gademysh2001/Documents/Android Automation/GIT/webbrowsing.txt", 'a')
+    def report_time_of_websites(self, website, browser):
+        file = open("C:/Users/gademysh2001/Documents/Android Automation/GIT/Python_mobile_browsing/Test/report.txt", 'a')
         file.write("\n " + browser + ": " + website + self.driver.get_device_time())
         file.close()
 
     def test_open_chrome_browser(self):
-        self.browser = "Chrome"
         self.open_browser = self.driver.find_element(AppiumBy.ACCESSIBILITY_ID, "Chrome")
         self.open_browser.click()
         # open websites
@@ -58,7 +67,7 @@ class TestBrowsers:
                                        {
                                            'action': 'go'})
             print("Website:" + i, self.driver.get_device_time())
-            self.file_time_of_websites(i, self.browser)
+            self.report_time_of_websites(i, browser="Chrome")
             time.sleep(self.time)
 
             tab_icon = self.driver.find_element(AppiumBy.ID, "com.android.chrome:id/tab_switcher_button")
@@ -75,7 +84,6 @@ class TestBrowsers:
         self.driver.press_keycode(3)
 
     def test_open_opera_browser(self):
-        self.browser = "Opera"
         self.driver.swipe(self.start_x, self.start_y, self.end_x, self.end_y, self.duration)
         self.driver.swipe(self.start_x, self.start_y, self.end_x, self.end_y, self.duration)
         self.open_browser = self.driver.find_element(AppiumBy.XPATH, '//android.widget.TextView[@text="Opera"]')
@@ -90,7 +98,7 @@ class TestBrowsers:
                                            'action': 'go'})
             print("Website:" + i, self.driver.get_device_time())
 
-            self.file_time_of_websites(i, self.browser)
+            self.report_time_of_websites(i, browser="Opera")
 
             time.sleep(self.time)
             search_bar.click()
@@ -99,7 +107,6 @@ class TestBrowsers:
         self.driver.press_keycode(3)
 
     def test_open_duckduckgo_browser(self):
-        self.browser = "DuckDuckGo"
         self.driver.swipe(self.start_x, self.start_y, self.end_x, self.end_y, self.duration)
         self.open_browser = self.driver.find_element(AppiumBy.ACCESSIBILITY_ID, "DuckDuckGo")
         self.open_browser.click()
@@ -110,7 +117,7 @@ class TestBrowsers:
             self.driver.press_keycode(66)
 
             print("Website:" + i, self.driver.get_device_time())
-            self.file_time_of_websites(i, self.browser)
+            self.report_time_of_websites(i, browser="DuckDuckGo")
 
             time.sleep(self.time)
             if i != self.websites[-1]:
