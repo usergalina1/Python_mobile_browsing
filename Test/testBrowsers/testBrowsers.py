@@ -1,30 +1,15 @@
 import time
 import unittest
 
-from appium import webdriver
 from appium.webdriver.common.appiumby import AppiumBy
 
+from conftest import Base
 
-class TestBrowsers(unittest.TestCase):
 
-    def setUp(self):
-        self.driver = webdriver.Remote(command_executor="http://localhost:4723/wd/hub",
-                                       desired_capabilities=
-                                       {
-                                           "deviceName": "04RAYV406P ",
-                                           "version": "12.0",
-                                           "platformName": "Android",
-                                           "automationName": "UIAutomator2",
-                                       })
-
-        self.driver.implicitly_wait(20)
-
-    def teardown(self):
-        self.driver.quit()
-
+class TestBrowsers(Base):
     websites = [
         'https://www.nbc.com/',
-        'https://www.m.youtube/',
+        'http://youtube.com/',
         'https://www.buzzfeed.com/',
         'https://www.espn.com/watch',
         'https://www.instagram.com/',
@@ -49,10 +34,12 @@ class TestBrowsers(unittest.TestCase):
     end_x = 943
     end_y = 90
     duration = 300
-    time = 20
+    time = 5
 
     def report_time_of_websites(self, website, browser):
-        file = open("C:/Users/gademysh2001/Documents/Android Automation/GIT/Python_mobile_browsing/Test/report.txt", 'a')
+        file = open(
+            "C:/Users/gademysh2001/Documents/Android Automation/GIT/Python_mobile_browsing/Test/testBrowsers/report.txt",
+            'a')
         file.write("\n " + browser + ": " + website + self.driver.get_device_time())
         file.close()
 
