@@ -38,7 +38,7 @@ class TestBrowsers(Base):
 
     def report_time_of_websites(self, website, browser):
         file = open(
-            "C:/Users/gademysh2001/Documents/Android Automation/GIT/Python_mobile_browsing/Test/testBrowsers/report.txt",
+            "/test/testBrowsers/report.txt",
             'a')
         file.write("\n " + browser + ": " + website + self.driver.get_device_time())
         file.close()
