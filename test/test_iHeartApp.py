@@ -1,3 +1,4 @@
+import os
 import time
 import unittest
 
@@ -6,26 +7,19 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 
+
 from conftest import Base
 
 
 class TestiHeartRadioApp(Base):
-    start_x = 460
-    start_y = 897
-    end_x = 543
-    end_y = 90
-    duration = 300
     playing_time = 10
 
     def test_open_iHeartRadio(self):
         print("\n" + "________iHeartRadio app")
 
-        # scroll to iHeartRadio app
-        self.driver.swipe(self.start_x, self.start_y, self.end_x, self.end_y, self.duration)
-        self.driver.swipe(self.start_x, self.start_y, self.end_x, self.end_y, self.duration)
-
         # open app
-        self.driver.find_element(AppiumBy.ACCESSIBILITY_ID, 'iHeartRadio').click()
+        os.system(
+            'adb shell am start -n com.clearchannel.iheartradio.controller/com.iheart.activities.NavDrawerActivity')
         WebDriverWait(self.driver, 30) \
             .until(EC.presence_of_element_located((By.ID, "com.clearchannel.iheartradio.controller:id/logo_image")))
 
