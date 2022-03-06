@@ -1,3 +1,4 @@
+import os
 import time
 import unittest
 
@@ -10,23 +11,13 @@ from conftest import Base
 
 
 class TestYTMusicApp(Base):
-    start_x = 860
-    start_y = 1597
-    end_x = 943
-    end_y = 90
-    duration = 300
     playing_time = 10
 
     def test_open_YTMusic(self):
         print("\n" + "________YouTube Music app")
 
-        # scroll to YTMusic app
-        self.driver.swipe(self.start_x, self.start_y, self.end_x, self.end_y, self.duration)
-        self.driver.swipe(self.start_x, self.start_y, self.end_x, self.end_y, self.duration)
-        self.driver.swipe(self.start_x, self.start_y, self.end_x, self.end_y, self.duration)
-
         # open app
-        self.driver.find_element(AppiumBy.ACCESSIBILITY_ID, 'YT Music').click()
+        os.system('adb shell am start -n com.google.android.apps.youtube.music/com.google.android.apps.youtube.music.activities.MusicActivity')
         print('Opened app (FOREGROUND) at ' + self.driver.get_device_time())
 
         # verify the YT Music screen opened
